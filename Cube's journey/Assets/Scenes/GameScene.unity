@@ -720,6 +720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 725896162}
+  _isGrounded: 0
   JumpForce: 1
   SpeedForce: 10
 --- !u!54 &803617677
@@ -929,6 +930,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0052d187ed97e643aefb070a6162bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 803617671}
+  target: {fileID: 803617675}
+  smooth: 5
 --- !u!1 &1192461909
 GameObject:
   m_ObjectHideFlags: 0
