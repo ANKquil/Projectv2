@@ -14,14 +14,13 @@ public class PlayerController : MonoBehaviour
     // Setting
     public bool _isGrounded;
     public float JumpForce = 1;
-    public float SpeedForce = 100;
+    public float SpeedForce = 15;
 
     private void Awake()
     {
         _rb = gameObject.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void FixedUpdate ()
     {
         Move();
@@ -29,7 +28,9 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        transform.Translate(Vector3.forward * SpeedForce * Time.fixedDeltaTime);
+        transform.position = Vector3.Lerp(transform.position, 
+            new Vector3(transform.position.x, transform.position.y, transform.position.z + 1), 
+            Time.fixedDeltaTime * SpeedForce);
     }
 
     public void Jump()

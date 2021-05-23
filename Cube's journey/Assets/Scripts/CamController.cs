@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CamController : MonoBehaviour
 {
-    public GameObject player;
     public Transform target;
-    public float smooth = 0.25f;
+    public float smooth = 1f;
     private Vector3 offset;
 
     private void Start()
@@ -16,8 +15,8 @@ public class CamController : MonoBehaviour
             transform.position.z - target.position.z);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, target.position + offset, Time.deltaTime * smooth);
+        transform.position = Vector3.Lerp(transform.position, target.position + offset, Time.fixedDeltaTime * smooth);
     }
 }
