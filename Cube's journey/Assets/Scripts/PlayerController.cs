@@ -12,17 +12,13 @@ public class PlayerController : MonoBehaviour
     Rigidbody _rb;
 
     // Setting
+    public bool _isGrounded;
     public float JumpForce = 1;
     public float SpeedForce = 100;
 
     private void Awake()
     {
         _rb = gameObject.GetComponent<Rigidbody>();
-    }
-
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -38,6 +34,27 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        _rb.AddForce(Vector3.up * JumpForce);
+        if (_isGrounded)
+        {
+            _rb.AddForce(Vector3.up * JumpForce);
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        IsGroundedUpate(collision, true);
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        IsGroundedUpate(collision, false);
+    }
+
+    private void IsGroundedUpate(Collision collision, bool value)
+    {
+        if (collision.gameObject.tag == ("Ground"))
+        {
+            _isGrounded = value;
+        }
     }
 }
