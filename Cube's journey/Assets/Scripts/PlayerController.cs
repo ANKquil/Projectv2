@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Main
+    public GameObject gameController;
+
+    // Components
+    Rigidbody rb;
+
+    // Setting
+    public float JumpForce = 1;
+
+
     void Start()
     {
         
@@ -14,5 +23,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Jump()
+    {
+        rb.AddForce(Vector3.up * JumpForce);
     }
 }
