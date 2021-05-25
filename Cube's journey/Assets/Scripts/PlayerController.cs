@@ -38,17 +38,18 @@ public class PlayerController : MonoBehaviour
         if (_isGrounded)
         {
             _rb.AddForce(Vector3.up * JumpForce);
+            _isGrounded = false;
         }
+    }
+
+    public void Down()
+    {
+        _rb.AddForce(- Vector3.up * JumpForce * 1.9f);
     }
 
     void OnCollisionEnter(Collision collision)
     {
         IsGroundedUpate(collision, true);
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        IsGroundedUpate(collision, false);
     }
 
     private void IsGroundedUpate(Collision collision, bool value)
