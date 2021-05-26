@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Main
+    public bool active = false;
     public GameObject gameController;
 
     // Components
@@ -28,23 +29,36 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        transform.position = Vector3.Lerp(transform.position, 
-            new Vector3(transform.position.x, transform.position.y, transform.position.z + 1), 
-            Time.fixedDeltaTime * SpeedForce);
+        if (active)
+            transform.position = Vector3.Lerp(transform.position, 
+                new Vector3(transform.position.x, transform.position.y, transform.position.z + 1), 
+                Time.fixedDeltaTime * SpeedForce);
     }
 
     public void Jump()
     {
-        if (_isGrounded)
+        if (_isGrounded && active)
         {
             _rb.AddForce(Vector3.up * JumpForce);
             _isGrounded = false;
         }
     }
 
+    public void Stop()
+    {
+        active = false;
+    }
+    public void Go()
+    {
+        active = true;
+    }
+
     public void Down()
     {
-        _rb.AddForce(- Vector3.up * JumpForce * 1.9f);
+        if (!_isGrounded && active)
+        {
+            _rb.AddForce(-Vector3.up * JumpForce * 1.9f);
+        }
     }
 
     void OnCollisionEnter(Collision collision)
